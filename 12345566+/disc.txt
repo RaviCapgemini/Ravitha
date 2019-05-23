@@ -1,0 +1,23 @@
+ public ActionResult Create(LoginEmploy login)
+        {
+            string strcon = ConfigurationManager.ConnectionStrings["employconn"].ConnectionString;
+            SqlConnection conn = new SqlConnection(strcon);
+            //SqlCommand cmd;
+
+            SqlDataAdapter cmd;
+
+            conn.Open();
+            string query = "Select * from  Users WHERE UserName=@userName AND PAssword=@passWord";
+            cmd = new SqlDataAdapter(query, conn);
+            cmd.SelectCommand.Parameters.AddWithValue("@UserName", login.UserName);
+            cmd.SelectCommand.Parameters.AddWithValue("@Password", login.Password);
+            DataSet ds = new DataSet();
+            cmd.Fill(ds, "EmployDummy");
+            int count = ds.Tables[0].Rows.Count;
+
+            if (count == 1)
+            {
+                return RedirectToAction("Index", "Employ");
+            }
+            return View();
+        }

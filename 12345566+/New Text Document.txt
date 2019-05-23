@@ -1,0 +1,128 @@
+    --Creating Database Here
+
+CREATE DATABASE MiniProject
+GO
+
+     --Using MiniProject Database
+
+USE MiniProject
+GO
+ 
+     --To Drop Existing Customer Table
+
+IF EXISTS(SELECT * FROM SYSOBJECTS WHERE Name='Customer') 
+DROP TABLE Customer 
+GO
+
+     --To Create Customer Table
+
+CREATE TABLE Customer
+(
+     CustomerNumber int CONSTRAINT PK_CustomerNumber PRIMARY KEY,
+     CustomerName varchar(30),
+	 Address varchar(75),
+     Mobile bigint,
+	 Gender varchar(30)
+	 CONSTRAINT CHK_Customer_Gender CHECK(Gender IN ('MALE','FEMALE')),
+	 DOB DATE,
+	 SMOKERorNONSMOKER varchar(30)
+	 CONSTRAINT CHK_Customer_SMOKERorNONSMOKER CHECK(SMOKERorNONSMOKER IN ('SMOKER','NONSMOKER')),
+	 Hobbies varchar(30),  
+	 CreateID varchar(30) DEFAULT SYSTEM_USER,
+	 CreateDate DateTime DEFAULT GETDATE(),
+	 UpdateID varchar(30) DEFAULT SYSTEM_USER,
+	 UpdateDate DateTime DEFAULT GETDATE()
+	       
+)
+GO
+
+SELECT * FROM CUSTOMER
+
+     --To Drop Existing Product Table
+
+IF EXISTS(SELECT * FROM SYSOBJECTS WHERE Name='Product') 
+DROP TABLE Product 
+GO
+
+     --To Create Product Table
+
+CREATE TABLE Product
+(
+	ProductID int CONSTRAINT PK_ProductID PRIMARY KEY,
+	ProductName varchar(30),
+	CreateID varchar(30) DEFAULT SYSTEM_USER,
+	CreateDate DateTime DEFAULT GETDATE(),
+	UpdateID varchar(30) DEFAULT SYSTEM_USER,
+	UpdateDate DateTime DEFAULT GETDATE()
+)
+
+SELECT * FROM Product
+
+     --To Drop Existing Policy Table
+
+IF EXISTS(SELECT * FROM SYSOBJECTS WHERE Name='Policy') 
+DROP TABLE Policy 
+GO
+
+     --To Create Policy Table
+
+CREATE TABLE Policy
+(
+	 PolicyNumber int CONSTRAINT PK_PolicyNumber PRIMARY KEY,
+	 CustomerNumber int CONSTRAINT FK_CustomerNumber FOREIGN KEY(CustomerNumber) REFERENCES Customer(CustomerNumber),
+	 ProductID int CONSTRAINT FK_ProductID FOREIGN KEY(ProductID) REFERENCES Product(ProductID),
+	 CreateID varchar(30) DEFAULT SYSTEM_USER,
+	 CreateDate DateTime DEFAULT GETDATE(),
+	 UpdateID varchar(30) DEFAULT SYSTEM_USER,
+	 UpdateDate DateTime DEFAULT GETDATE()
+
+)
+
+SELECT * FROM Policy
+
+     --To Drop Existing Endorsement Table
+
+IF EXISTS(SELECT * FROM SYSOBJECTS WHERE Name='Endorsement') 
+DROP TABLE Endorsement 
+GO
+
+	 --To Create Endorsement Table
+
+CREATE TABLE Endorsement
+(
+	TransactionID int IDENTITY(1,1) CONSTRAINT PK_TransactionID PRIMARY KEY,
+	PolicyNumber int CONSTRAINT FK_PolicyNumber FOREIGN KEY(PolicyNumber) REFERENCES Policy(PolicyNumber),
+	CustomerNumber int CONSTRAINT FK_CustomerNumber1 FOREIGN KEY(CustomerNumber) REFERENCES Customer(CustomerNumber),
+	ProductID int CONSTRAINT FK_ProductID1 FOREIGN KEY(ProductID) REFERENCES Product(ProductID),
+	CreateID varchar(30) DEFAULT SYSTEM_USER,
+	CreateDate DateTime DEFAULT GETDATE(),
+	UpdateID varchar(30) DEFAULT SYSTEM_USER,
+	UpdateDate DateTime DEFAULT GETDATE()
+)
+
+SELECT * FROM Endorsement
+
+     --To Drop Existing Login Table
+
+IF EXISTS(SELECT * FROM SYSOBJECTS WHERE Name='Login') 
+DROP TABLE Login 
+GO
+
+	 --To Create Login Table
+
+CREATE TABLE Login
+(
+	LoginID Varchar(30) CONSTRAINT PK_LoginID PRIMARY KEY,
+	Password Varchar(30),
+	CustomerNumber int CONSTRAINT FK_CustomerNumber2 FOREIGN KEY(CustomerNumber) REFERENCES Customer(CustomerNumber),
+	CreateID varchar(30) DEFAULT SYSTEM_USER,
+	CreateDate DateTime DEFAULT GETDATE(),
+	UpdateID varchar(30) DEFAULT SYSTEM_USER,
+	UpdateDate DateTime DEFAULT GETDATE()
+)
+
+SELECT * FROM Login
+
+insert into customer(CustomerNumber,CustomerName,Address,Mobile,Gender,DOB,SMOKERorNONSMOKER,Hobbies) 
+values(1,'Vishal','theni',9897656787,'Male','2017/12/12','smoker','surfing')
+go

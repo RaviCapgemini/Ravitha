@@ -1,0 +1,10 @@
+"sqlpracticeConn" connectionString="integrated security=true;initial catalog=sqlpractice;data source=DESKTOP-UP0VR2L"
+
+WEBCON
+=====
+ <connectionStrings>
+    <add name="bookconn"
+         connectionString="Data Source=DESKTOP-UP0VR2L;
+         initial catalog=sqlpractice;user id=sa;password=P@ssw0rd"
+         providerName="System.Data.SqlClient"/>
+  </connectionStrings>

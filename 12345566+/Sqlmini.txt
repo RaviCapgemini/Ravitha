@@ -1,0 +1,9 @@
+
+
+Mini Projec
+==============
+
+1. Visual Studio->C#-> WPF
+2. Proj-> addnew_> ado.Net entity Model
+3. File-> add -> new item-> class library-> (Entity, Exception)
+4. Right Click On WPF -> add-> newitem -> (Window WPF)    

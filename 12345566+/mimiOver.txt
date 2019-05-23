@@ -1,0 +1,22 @@
+AddCustomer
+AddPolicy
+AddProduct
+AdminHomePage
+CustomerDetails
+UserHomePage
+Endoresemnt approval
+EndorsementPageC
+AdminEndorsementPage
+LoginPageGene
+LoginPage
+SearchPolicy
+Transaction Details
+Transaction DetailsID
+UpdatePolicy
+
+
+
+
+
+
+Add Customer, add policy  cheythu

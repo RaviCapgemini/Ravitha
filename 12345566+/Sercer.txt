@@ -1,0 +1,17 @@
+http://localhost:49970/api/Books
+
+
+
+
+http://localhost:50841/api/EMps
+
+
+
+
+Cahing
+=====
+The problem of slow acess can be resolved by using caching.
+
+1 output caching - <%@ ouputcahe%> - duratiopn should be specify. and is changed according to the program
+2 fragment caching
+3 data chaching
